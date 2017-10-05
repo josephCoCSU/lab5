@@ -1,15 +1,15 @@
 <?php
     require_once('database.php');
 
-    // Get category ID
-    if(!isset($category_id)) {
-        $category_id = $_GET['category_id'];
-        if (!isset($category_id)) {
-            $category_id = 1;
+    // Get productCode
+    if(!isset($productCode) {
+        $productCode= $_GET['productCode'];
+        if (!isset($productCode) {
+            $productCode = 1;
         }
     }
 
-    // Get name for current category
+    // Get name for current product
     $query = "SELECT * FROM categories
               WHERE categoryID = $category_id";
     $category = $db->query($query);
@@ -32,7 +32,7 @@
 
 <!-- the head section -->
 <head>
-    <title>My Guitar Shop</title>
+    <title>Technical Support</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 
@@ -41,7 +41,7 @@
     <div id="page">
 
     <div id="header">
-        <h1>Product Manager</h1>
+        <h1>Tech Support</h1>
     </div>
 
     <div id="main">
