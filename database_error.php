@@ -3,7 +3,7 @@
 
 <!-- the head section -->
 <head>
-    <title>My Guitar Shop</title>
+    <title>Tech Support</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 
@@ -11,7 +11,7 @@
 <body>
     <div id="page">
         <div id="header">
-            <h1>My Guitar Shop</h1>
+            <h1>Tech Support</h1>
         </div>
 
         <div id="main">
@@ -25,7 +25,7 @@
 
         <div id="footer">
             <p class="copyright">
-                &copy; <?php echo date("Y"); ?> My Guitar Shop, Inc.
+                &copy; <?php echo date("Y"); ?> Technical Support.
             </p>
         </div>
 

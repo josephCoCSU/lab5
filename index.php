@@ -1,31 +1,24 @@
 <?php
     require_once('database.php');
 
-    // Get productCode
-    if(!isset($productCode) {
-        $productCode= $_GET['productCode'];
-        if (!isset($productCode) {
-            $productCode = 1;
+    // Get customerID
+    if(!isset($customer_id)) {
+        $customer_id= $_GET['customer_id'];
+        if (!isset($customer_id)) {
+            $customer_id = 1002;
         }
     }
+    // Get last name for current customer
+    $query = "SELECT lastName FROM customers
+              WHERE customerID = $customer_id";
+    $customer = $db->query($query);
+    $customer = $customer->fetch();
+    $customer_name = $customer['lastName'];
 
-    // Get name for current product
-    $query = "SELECT * FROM categories
-              WHERE categoryID = $category_id";
-    $category = $db->query($query);
-    $category = $category->fetch();
-    $category_name = $category['categoryName'];
-
-    // Get all categories
-    $query = 'SELECT * FROM categories
-              ORDER BY categoryID';
-    $categories = $db->query($query);
-
-    // Get products for selected category
-    $query = "SELECT * FROM products
-              WHERE categoryID = $category_id
-              ORDER BY productID";
-    $products = $db->query($query);
+	    // Get all customers
+    $query = 'SELECT * FROM customers
+              ORDER BY customerID';
+    $customers = $db->query($query);
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,16 +39,16 @@
 
     <div id="main">
 
-        <h1>Product List</h1>
+        <h1>Customer List</h1>
 
         <div id="sidebar">
-            <!-- display a list of categories -->
-            <h2>Categories</h2>
+            <!-- display a list of customer IDs -->
+            <h2>Customer IDs</h2>
             <ul class="nav">
-            <?php foreach ($categories as $category) : ?>
+            <?php foreach ($customers as $customer) : ?>
                 <li>
-                <a href="?category_id=<?php echo $category['categoryID']; ?>">
-                    <?php echo $category['categoryName']; ?>
+                <a href="?customer_id=<?php echo $customer['customerID']; ?>">
+                    <?php echo $customer['customerID']; ?>
                 </a>
                 </li>
             <?php endforeach; ?>
@@ -63,37 +56,29 @@
         </div>
 
         <div id="content">
-            <!-- display a table of products -->
-            <h2><?php echo $category_name; ?></h2>
+            <!-- display a table of customers -->
+            <h2><?php echo $customer_id; ?></h2>
             <table>
                 <tr>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th class="right">Price</th>
-                    <th>&nbsp;</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>city</th>
+                    <th>State</th>
                 </tr>
-                <?php foreach ($products as $product) : ?>
+                <?php foreach ($customers as $customer) : ?>
                 <tr>
-                    <td><?php echo $product['productCode']; ?></td>
-                    <td><?php echo $product['productName']; ?></td>
-                    <td class="right"><?php echo $product['listPrice']; ?></td>
-                    <td><form action="delete_product.php" method="post"
-                              id="delete_product_form">
-                        <input type="hidden" name="product_id"
-                               value="<?php echo $product['productID']; ?>" />
-                        <input type="hidden" name="category_id"
-                               value="<?php echo $product['categoryID']; ?>" />
-                        <input type="submit" value="Delete" />
-                    </form></td>
+                    <td><?php echo $customer['firstName']; ?></td>
+                    <td><?php echo $customer_name['lastName']; ?></td>
+                    <td><?php echo $customer['city']; ?></td>
+					<td><?php echo $customer['state']; ?></td>
                 </tr>
                 <?php endforeach; ?>
             </table>
-            <p><a href="add_product_form.php">Add Product</a></p>
         </div>
     </div>
 
     <div id="footer">
-        <p>&copy; <?php echo date("Y"); ?> My Guitar Shop, Inc.</p>
+        <p>&copy; <?php echo date("Y"); ?> Technical Support.</p>
     </div>
 
     </div><!-- end page -->
